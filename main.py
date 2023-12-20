@@ -1,7 +1,6 @@
 """
 Project: sd-FileRAVEN (Reader-friendly Application for Validated Entity Naming)
     Developed by Brian Conroy
-    Main Module: Controls file-handling and renaming
 
 sd-FileRAVEN is a cross-platform utility designed to assist users in quickly and effectively annotating and attributing models with information about base model, author, and version. By retrieving information for models downloaded from civitai.com and renaming the model files to user-friendly standardized filenames, sd-FileRAVEN helps to eliminate duplicates, prevent confusion between similarly or cryptically named models, enhances organization, and streamlines the user's model library. With its ability to help eliminate duplicates and to distinguish identically-named models, this application proves to be an invaluable asset for model management.
 
@@ -608,3 +607,5 @@ another_job = input("Do you want to perform another job? (y/n): ")
 if another_job.lower() != "y":
     print("Exiting.")
     break
+
+        
