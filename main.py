@@ -97,7 +97,7 @@ from PIL import Image
 # Constants
  Gradio_Title = "FileRAVEN"
  Gradio_Version = "0.1"
-civitai_api_url = "https://api.civitai.com/v1/models"
+ civitai_api_url = "https://api.civitai.com/v1/models"
 
     
 def get_sha256(file_path, chunk_size=8192):
