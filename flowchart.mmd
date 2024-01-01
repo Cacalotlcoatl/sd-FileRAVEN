@@ -1,18 +1,26 @@
 flowchart TD
     main([main.py begin])
-    main_choice[/Rename files, Edit templates, or quit\]
+    main_choice[/Rename files,
+        Edit templates,
+or Quit\]
     end_of_list[\end of file list?/]
     approve_filename{User Approval}
-    check_fr_name[/check for fileRAVEN nametag/]
-    set_construct_name[construct filename from model info]
+check_fr_name[/check for
+fileRAVEN nametag/]
+set_construct_name[construct filename
+from model info]
     cycle_file_list[go to next file in list]
     display_home[display ui home]
-    get_hash[calculate hash values for the model file]
+get_hash[calculate hash
+values for the
+model file]
     method_last[proposed_name = fr_name]
     method_no_info[proposed_name = current_name]
     read_local_info[/read info from file/]
     read_remote_to_model_info[/populate model_info from remote db/]
-    remote_info_method[construct filename from file info]
+remote_info_method[construct filename
+from file info]
+rename_file[rename file]
     search_remote[(search remote db for hash matches)]
     search_local[(search for local info files)]
     select_files[/select folder or files\]
@@ -24,39 +32,37 @@ flowchart TD
     quit([end program])
     main --> display_home
     display_home --> main_choice
-    main_choice -- select files --> select_files
-    main_choice -- edit filename template --> edit_template
-    main_choice -- quit --> quit
+main_choice --> |select files|select_files
+main_choice -->|edit filename template|edit_template
+main_choice -->|quit|quit
     select_files --> cycle_file_list
     cycle_file_list --> end_of_list
-    end_of_list -- yes --> display_home
-    end_of_list -- no --> method_no_info
+end_of_list -->|yes|display_home
+end_of_list -->|no|method_no_info
     method_no_info --> get_hash
     get_hash --> search_remote
     search_remote --> unique_hash
-    unique_hash -- nil --> search_local
-    unique_hash -- unique --> read_remote_to_model_info
-    unique_hash -- more --> select_match
+unique_hash -->|nil|search_local
+unique_hash -->|unique|read_remote_to_model_info
+unique_hash -->|more|select_match
     select_match --> read_remote_to_model_info
     read_remote_to_model_info --> search_local
-    search_local -- found --> read_local_info
+    search_local -->|found|read_local_info
     read_local_info --> check_fr_name
-    check_fr_name -- yes --> method_last
+check_fr_name -->|yes|method_last
     method_last --> approve_filename
-    check_fr_name -- no --> remote_info_method
-remote_info_method -- no info --> approve_filename
-    remote_info_method -- info --> method_construct
-    search_local -- not found --> remote_info_method
-    method_no_info --> set_nochange
+check_fr_name -->|no|remote_info_method
+remote_info_method -->|no info|approve_filename
+remote_info_method -->|info|method_construct
+search_local -->|not found|remote_info_method
     set_nochange --> approve_filename
-    method_last --> set_old
-    set_old --> approve_filename
+approve_filename -->|Revert|set_nochange
     method_construct --> set_construct_name
     set_construct_name --> approve_filename
-    approve_filename -- Yes --> rename_file
-    approve_filename -- No --> edit_filename
-    approve_filename -- Skip --> cycle_file_list
-    approve_filename -- Edit Filename Template --> edit_template
+approve_filename -->|Yes|rename_file
+approve_filename -->|No|edit_filename
+approve_filename -->|Skip|cycle_file_list
+approve_filename -->|Edit Filename Template|edit_template
 rename_file[rename file] --> cycle_file_list
     edit_filename --> approve_filename
     edit_template --> method_construct
