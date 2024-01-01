@@ -99,3 +99,29 @@ Default naming strategies:
                             ▪ Character:
                                 • {Character_name}_of_{title}_portrayed_by_{actor}_by_<content_>
                         ◦ Textual Inversions:
+
+        Information to extract from Civitai/Remote db:
+            - id                    number      The identifier for the model
+            - name                  string      The name of the model
+            - type                  enum        The model type (Checkpoint,
+                                                TextualInversion, Hypernetwork,
+                                                AestheticGradient, LORA,
+                                                Controlnet, Poses)
+            - nsfw                  boolean     NSFW flag
+            - tags                  list        A list of tags associated with
+                                                the model
+            - creator.username      string      The name of the creator
+            - modelVersions.id      number      The identifier for the model version
+            - modelVersions.name    string      The name of the model version
+            - modelVersions.files.  enumerated  The specified floating point for
+                metadata.fp                     the file (fp16, fp32, undefined)
+            - modelVersions.files.  enumerated  The specified model size for the
+                metadata.size                   file (full, pruned, or undefined)
+            - modelVersions.images. string	    The id for the image
+                id
+            - modelVersions.images. string	    The url for the image
+                url
+            - modelVersions.images. number	    The original width of the image
+                width
+            - modelVersions.images. number	    The original height of the image
+                height
