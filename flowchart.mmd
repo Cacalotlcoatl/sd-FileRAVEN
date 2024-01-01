@@ -38,7 +38,7 @@ flowchart TD
     unique_hash -- unique --> read_remote_to_model_info
     unique_hash -- more --> select_match
     select_match --> read_remote_to_model_info
-    read_remote_to_model_info -->
+    read_remote_to_model_info --> search_local
     search_local -- found --> read_local_info
     read_local_info --> check_fr_name
     check_fr_name -- yes --> method_last
