@@ -1,71 +1,121 @@
-flowchart TD
-    main([main.py begin])
-    main_choice[/Rename files,
-        Edit templates,
-or Quit\]
-    end_of_list[\end of file list?/]
-    approve_filename{User Approval}
+graph TD
+    main([fileRAVEN begin Execute main.py])
+subgraph main.py
+last_file[\end of file list?/]
+approve_filename{User Approval}
 check_fr_name[/check for
-fileRAVEN nametag/]
-set_construct_name[construct filename
-from model info]
-    cycle_file_list[go to next file in list]
-    display_home[display ui home]
+            fileRAVEN nametag/]
+cycle_file_list["`Next File`"
+last_file = current_file]
+display_home[display
+Main Menu]
 get_hash[calculate hash
 values for the
 model file]
-    method_last[proposed_name = fr_name]
-    method_no_info[proposed_name = current_name]
-    read_local_info[/read info from file/]
-    read_remote_to_model_info[/populate model_info from remote db/]
-remote_info_method[construct filename
-from file info]
+method_last["`**Last fileRAVEN Name**`"
+proposed_name =
+fr_name]
+method_no_info["`**Default/Revert**`"
+proposed_name =
+current_name]
+read_local_info[/populate model_info
+from local file.
+Overwrite remote data. /]
+read_remote_to_model_info[/populate model_info
+from remote db/]
 rename_file[rename file]
 search_remote[(search remote db
 for hash matches)]
-    search_local[(search for local info files)]
-    select_files[/select folder or files\]
+search_local[(search for
+local info files)]
+select_files[/"`File Selection Menu`"
+select files or folder\]
 select_match[/user select
 from matching models\]
-    set_construct_name[proposed_name = filename pattern]
-    set_nochange[proposed_name = current_name]
-    set_old[proposed_name = fr_name]
-    unique_hash{hash matched in remote db}
-    quit([end program])
-    main --> display_home
-    display_home --> main_choice
-main_choice --> |select files|select_files
-main_choice -->|edit filename template|edit_template
-main_choice -->|quit|quit
-    select_files --> cycle_file_list
-    cycle_file_list --> end_of_list
-end_of_list -->|yes|display_home
-end_of_list -->|no|method_no_info
-    method_no_info --> get_hash
-    get_hash --> search_remote
-    search_remote --> unique_hash
+unique_hash{hash
+matches found in
+remote db}
+quit([end program])
+method_construct[Construct Filename
+from data elements
+according to template]
+check_for_data{Verify at least
+one field of the naming
+template is filled}
+edit_template[/Edit Template
+for the currently
+selected file type\]
+select_model_type[/Select a
+model-type to edit \]
+main --> display_home
+display_home --> main_menu
+main_menu -->|select files|select_files
+main_menu -->|edit
+filename
+template|select_model_type
+select_model_type --> edit_template
+main_menu -->|quit|quit
+select_files --> cycle_file_list
+cycle_file_list --> last_file
+last_file -->|yes|display_home
+Last_file -->|no|get_hash
+get_hash --> search_remote
+search_remote --> unique_hash
 unique_hash -->|nil|search_local
 unique_hash -->|unique|read_remote_to_model_info
 unique_hash -->|more|select_match
-    select_match --> read_remote_to_model_info
-    read_remote_to_model_info --> search_local
-    search_local -->|found|read_local_info
-    read_local_info --> check_fr_name
+select_match --> read_remote_to_model_info
+read_remote_to_model_info --> search_local
+search_local -->|Local data: yes|read_local_info
+search_local -->|Remote Data: yes
+Local Data: no|check_for_data
+read_local_info --> check_fr_name
+search_local -->|Remote data: no
+Local data: no|method_no_info
 check_fr_name -->|yes|method_last
-    method_last --> approve_filename
-check_fr_name -->|no|remote_info_method
-remote_info_method -->|no info|approve_filename
-remote_info_method -->|info|method_construct
-search_local -->|not found|remote_info_method
-    set_nochange --> approve_filename
-approve_filename -->|Revert|set_nochange
-    method_construct --> set_construct_name
-    set_construct_name --> approve_filename
+method_last --> approve_filename
+check_fr_name -->|no|check_for_data
+check_for_data -->|yes|method_construct
+check_for_data -->|no|method_no_info
+method_construct -->|no info|approve_filename
+method_no_info --> approve_filename
+approve_filename -->|Revert|method_no_info
+approve_filename -->|Undo Last|ReIndex_Last[current_model=
+last_model]
+main_menu -->|Undo Last|ReIndex_Last
+ReIndex_Last --> rename_revert
+rename_revert --> last_file
+method_construct --> approve_filename
 approve_filename -->|Yes|rename_file
 approve_filename -->|No|edit_filename
 approve_filename -->|Skip|cycle_file_list
-approve_filename -->|Edit Filename Template|edit_template
+approve_filename -->|Edit
+Filename
+Template|edit_template
 rename_file[rename file] --> cycle_file_list
-    edit_filename --> approve_filename
-    edit_template --> method_construct
-edit_template --> set_construct_name
+edit_filename --> approve_filename
+edit_template_routing -->|file selected|method_construct
+edit_template_routing -->|no file
+selected|display_home
+edit_template --> edit_template_routing{File
+selected for
+renaming?}
+main_menu -->|Manual
+Model
+Info|manual_model_edit[[Manual Model Edit]]
+manual_model_edit --> manual_model_edit_keep[\Keep Changes?/]
+manual_model_edit_keep -->|Yes|write_local_data[\Write Model
+Data to
+Local File\]
+manual_model_edit_keep -->|No|main_menu
+write_local_data --> main_menu
+end subgraph main.py
+subgraph ui.py
+main_menu[/"`**Main Menu**`"
+Rename files,
+Edit templates,
+Undo Last,
+Manual Model Info,
+Quit\]
+end subgraph ui.py
+end graph
