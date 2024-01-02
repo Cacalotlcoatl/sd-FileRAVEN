@@ -1,8 +1,28 @@
 graph TD
+%%  Terminal symbol: ([Stadium symbol]) - Program start and end points.
+%%  Process symbol: [box] - Statements or operations.
+%%  Function symbol: [[predefined process]] - Function or a subroutine.
+%%  External function: (external function) - External function or third-party
+%%      software (e.g., web-app).
+%%  Conditional symbol: {diamond} - Decision or conditional branch.
+%%  Input symbol: [/Right Parallelogram/] - User input.
+%%  Output symbol: [\Left Parallelogram\] - Output to monitor.
+%%  Storage symbol: [(cylinder)] - Read/write to/from a database or file.
+%%  Data symbol: {{hexagon}} - Data assignment statements.
+%%  Initialize: >asymmetric] - Initialize variables.
+%%  Document: [\Inverted Trapezoid/] - Report/document generation.
+%%  Process symbol: [\Regular Trapezoid/] - Statements or operations not
+%%      specifically covered by other symbols.
     main([fileRAVEN begin Execute main.py])
 subgraph main.py
 last_file[\end of file list?/]
-approve_filename{User Approval}
+approve_filename[/ `"User Approval Menu/`"
+Rename the Model,
+Edit Naming Template
+Edit Model Info
+Revert to Current Name
+Undo Last Renaming
+\]
 check_fr_name[/check for
             fileRAVEN nametag/]
 cycle_file_list["`Next File`"
@@ -30,8 +50,6 @@ search_local[(search for
 local info files)]
 select_files[/"`File Selection Menu`"
 select files or folder\]
-select_match[/user select
-from matching models\]
 unique_hash{hash
 matches found in
 remote db}
@@ -100,16 +118,13 @@ selected|display_home
 edit_template --> edit_template_routing{File
 selected for
 renaming?}
-main_menu -->|Manual
-Model
-Info|manual_model_edit[[Manual Model Edit]]
-manual_model_edit --> manual_model_edit_keep[\Keep Changes?/]
 manual_model_edit_keep -->|Yes|write_local_data[\Write Model
 Data to
 Local File\]
 manual_model_edit_keep -->|No|main_menu
 write_local_data --> main_menu
-end subgraph main.py
+end
+
 subgraph ui.py
 main_menu[/"`**Main Menu**`"
 Rename files,
@@ -117,5 +132,13 @@ Edit templates,
 Undo Last,
 Manual Model Info,
 Quit\]
-end subgraph ui.py
-end graph
+main_menu -->|Manual
+Model
+Info|manual_model_edit[[Manual Model Edit]]
+select_match[/user select
+from matching models\]
+manual_model_edit[[Manual Model Edit]]
+manual_model_edit --> manual_model_edit_keep[\Keep Changes?/]
+
+
+end
