@@ -20,15 +20,50 @@ application proves to be an invaluable asset for model management.
 
 #### project/
 
-1. fileRAVEN.bat
-2. main.py         (Model renaming logic)
-3. ui.py           (User Interface)
-4. fileRAVEN.config
-5. remote_db.json (API info for remote information source databases)
-6. keyring.json (encrypted api keys)
-6. templates/      (HTML templates for displaying model info)  
-   6.1 base.html  
-   6.2 model.html
+1. **Launcher**  fileRAVEN.bat
+2. **Main Configuration**  fileRAVEN.config
+3. **Main Module**  main.py
+3. **GUI Module**  ui.py
+    1. **Streamlit** Standalone framework
+    2. **Streamlit** Extension framework
+    2. **Gradio** Extension framework
+4. **Integrations Module** integration/
+    1. Active Development
+    2. Future Development
+        1. [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+        2. [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+        3. [AI Horde](https://stablehorde.net/)
+        4. [InvokeAI](https://github.com/invoke-ai/InvokeAI)
+    3. Under Consideration:
+        - [Runway Stable Diffusion](https://github.com/runwayml/stable-diffusion)
+        - [Compviz Stable Diffusion](https://github.com/CompVis/stable-diffusion)
+        - [GLID-3-XL-stable](https://github.com/Jack000/glid-3-xl-stable)
+        - [Deforum Stable Diffusion](https://github.com/deforum/stable-diffusion)
+        - [Deforum Stable Diffusion Local Version](https://github.com/HelixNGC7293/DeforumStableDiffusionLocal)
+        - [diffusion-ui](https://github.com/leszekhanusz/diffusion-ui)
+        - [Sygil WebUI](https://github.com/Sygil-Dev/sygil-webui/)
+        - [Easy Diffusion](https://github.com/easydiffusion/easydiffusion)
+        - ~~GRisk AI~~ software behind paywall is not considered
+        - [stable_diffusion.openvino](https://github.com/bes-dev/stable_diffusion.openvino)
+        - [Stable Diffusion WebUI Docker](https://github.com/AbdBarho/stable-diffusion-webui-docker)
+        - [NMKD Stable Diffusion GUI](https://nmkd.itch.io/t2i-gui)
+        - [~~Diffusion
+          Bee~~](https://github.com/divamgupta/diffusionbee-stable-diffusion-ui/tree/master)
+          Not
+          doing Mac software. If someone else wants to handle this be my guest.
+        - [~~Unstable Diffusion~~](https://github.com/ahrm/UnstableFusion)
+          Dead project?
+        - [~~Japanese Stable
+          Diffusion~~](https://github.com/rinnakk/japanese-stable-diffusion)
+          Dead project?
+5. **File IO Module**  manager.py
+5. **Lookup Module**  remote.py
+    1. **Lookup Module Configuration**  remote.config
+    2. **API Keyring** remote.keyring
+5. **Templates** templates/
+    1. base.html
+    2. model.html
+    3. style.css
 7. readme.md
 8. fileRAVEN_Developer's_Reference.md (This document)
 
@@ -52,7 +87,7 @@ launch options and start main.py.
 
 ---
 
-### 2. main.py
+### 2. Main Module (main.py)
 
 main.py controls program flow, data flow, and performs all logical
 operations and checks.
@@ -78,22 +113,32 @@ operations and checks.
 
 ---
 
-### 3. ui.py
+### 3. GUI Module (ui.py)
 
 ui.py handles the user interface, windows, human input and display output
 (but not disk operations or api calls)
 
-#### 1.0. Program flow
+#### 1. Program flow and Organization
 
-#### 1.1. Imports
+The ui module will contain code for the various menus and dialogs:
+> ### UI Functions
+>- Main Menu
+>- File Picker Dialog
+>- Model ID Lineup Dialog
+>- Model Renaming Menu
+>- Model De-Duping Dialog
+>- Model-Page Preview Screen
+>- Simple Dialog
 
-#### 1.2. Classes
+#### 2. Imports
 
-#### 1.3. Constants
+#### 3. Classes
 
-#### 1.4. Functions
+#### 4. Constants
 
-#### 1.5. Variables
+#### 5. Functions
+
+#### 6. Variables
 
 #### TODO:
 
