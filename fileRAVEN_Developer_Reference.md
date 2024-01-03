@@ -283,12 +283,44 @@ encrypted using a basic method and stored with it's key.
 
 2. Launch Options
 3. Model Identification
-   If the model does not have a model-page stored in its <model>.info file,
-   <model>.civitai.info, or <model>.json files fileRAVEN will search through
-   its remote databases until it finds a model-page. As it stands, it makes
-   sense to hard-code civitai.com and huggingface.co. but as there are
-   others out there, and surely others will emerge, fileRAVEN should not be
-   limited by them. The search will begin with a search by crc32 in civitai.
-   com. If the crc32 search has no returns, or multiple returns, the program
-   will perform an sha-256 search of civitai.com. If both hash searches
-   produce no matches, search by known information
+    1. If the model does not have a model-page stored in its _\<model\>.info_,
+       _\<model\>.civitai.info_, or _\<model\>.json_ files fileRAVEN will search
+       through the configured remote databases to find a model-page.
+        * NOTE: As it stands, it makes sense to hard-code http://civitai.com and
+          http://huggingface.co. but as there are some few others out there, and
+          surely others will emerge, fileRAVEN should not be limited by or to
+          those 2 sites. Other databases may be added by dialog
+          and their apis configured through the gui.
+    2. The search will begin with a search by _CRC32_ hash in _civitai.
+       com._
+    3. If the _CRC32_ search has no returns, or multiple returns, the program
+       will perform an _SHA-256_ search of _civitai.com._
+    4. If both hash searches produce no matches, the program will search any
+       other remote databases that allow searching by hash and following the
+       same rules as above, as applicable.
+    5. If there are still no matches, the program will search by all known
+       searchable information (i.e. author_name, title, model_name,
+       current_file_name, etc.) on all configured databases).
+    4. If the _SHA-256_ search returns a unique result, that model's information
+       from the model-page will be loaded into the appropriate **model_info**
+       fields, **NOTE:** Do not overwrite existing data without
+       user confirmation!
+    5. If there are multiple results from the _SHA-256_ search; or multiple
+       results from the _CRC32_ search **_and_** no results from the _SHA-256_
+       search;
+       or there were no results from both the _CRC32_ and _SHA-256_
+       searches, the results of all the subsequent searches will be
+       presented for the user to select and confirm the correct model from the
+       results (allowing for an option for "none-of-the-above")
+    6. If no matching model is found on the remote databases, the user will
+       be asked to supply what model information they can through the **"Edit
+       Model Information"** dialogue.
+    7. If searchable information is entered by the user that was not
+       present before, the remote search should be automatically performed
+       again.
+    8. If the second search produces no results, proceed to **name_approval**,
+       using available information to fill the template or
+       redisplaying the current filename if no information is available.
+    9. If the second search produces a unique result, load the model-page
+       into **model_info** as above.
+    10. If the second search produces multiple results, go to  **_vii_** above.
