@@ -21,9 +21,9 @@ application proves to be an invaluable asset for model management.
 #### project/
 
 1. **Launcher**  fileRAVEN.bat
-2. **Main Configuration**  fileRAVEN.config
 3. **Main Module**  main.py
-3. **GUI Module**  ui.py
+    1. **Main Configuration**  fileRAVEN.config
+4. **GUI Module**  ui.py
     1. **Streamlit** Standalone framework
     2. **Streamlit** Extension framework
     2. **Gradio** Extension framework
@@ -56,10 +56,10 @@ application proves to be an invaluable asset for model management.
         - [~~Japanese Stable
           Diffusion~~](https://github.com/rinnakk/japanese-stable-diffusion)
           Dead project?
-5. **File IO Module**  manager.py
-5. **Lookup Module**  remote.py
-    1. **Lookup Module Configuration**  remote.config
-    2. **API Keyring** remote.keyring
+5. **File IO Module**  fileRAVEN_manager.py
+5. **Lookup Module**  fileRAVEN_remote.py
+    1. **Lookup Module Configuration**  fileRAVEN_remote.config
+    2. **API Keyring** fileRAVEN_remote.keyring
 5. **Templates** templates/
     1. base.html
     2. model.html
@@ -223,6 +223,25 @@ encrypted using a basic method and stored with it's key.
 
 ---
 
+### 7. readme.md
+
+#### 1. User level documentation
+
+##### 1. Standalone Manager
+
+##### 2. Plugins and Extensions
+
+###### 1. stable-diffusion-webui extension
+
+###### 2. ComfyUI extension
+
+###### 3. AI Horde extension
+
+###### 4. InvokeAI extension
+
+#### 2. Tutorials
+
+---
 ### 8. Developer's Reference
 
 8.1 Default Naming Templates with notes on strategies
