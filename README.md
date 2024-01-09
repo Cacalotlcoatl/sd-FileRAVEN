@@ -1,7 +1,7 @@
 # sd-FileRAVEN (Reader-friendly Application for Validated Entity Naming)
 
 ## **Status: Suspended Pre-Alpha Early development (contributions welcome!)**
-###I have suspended this project briefly while I achieve some of my education goals. Don't worry, I'll be back soon and get this project on-track!
+### I have suspended this project briefly while I achieve some of my education goals. Don't worry, I'll be back soon and get this project on-track!
 
 ### Note: As a newcomer to software development, this project is my personal endeavor to learn Python programming and project management fundamentals. I am aware that I have much to learn, and am open to criticism. Your patience and understanding are greatly appreciated as I embark on this learning journey. Contributions from experienced developers or enthusiasts are warmly welcomed and will help shape the project's growth and success. Together, let's create something remarkable.
 
