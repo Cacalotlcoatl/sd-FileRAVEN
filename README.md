@@ -1,7 +1,7 @@
 # sd-FileRAVEN (Reader-friendly Application for Validated Entity Naming)
 
-## **Status: Very Early development (contributions welcome!)**
-### Note: I am very new to Python and to managing a Github project. Please be patient for I have only half a clue!
+## **Status: Pre-Alpha Early development (contributions welcome!)**
+### Note: I am very new to software development and have a lot to learn. This project is meant to be a hobbhy project to help me learn Python programming and project management fundamentals on GitHub. Please be patient as I learn.
 
 Organize &amp; manage your Civitai models! sd-FileRAVEN cleans duplicates, standardizes filenames, adds author &amp; version info, making your library neat &amp; easy to navigate. Ditch confusing names &amp; say goodbye to model chaos!
 
