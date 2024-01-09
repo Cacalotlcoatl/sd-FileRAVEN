@@ -14,17 +14,17 @@
 
 ## Initial Feature Set in Development:
 - Standalone program works with any user interface/s you use!
-- Developed with Python 3.10.6 for stability and cross-platform compatibility with stable-diffusion-webui.
-- Automatically annotates and renames files: Retrieves model information from civitai.com and standardizes filenames to include model name, author, version, and base model for easy identification.
-- The CivitAI Model Page is displayed, allowing the user to verify accuracy and make informed decisions regarding renaming.
-- Automatically renames all associated files (.civitai.info; .preview.png; etc.). Users have the opportunity to fine-tune the name before renaming occurs.
-- Automatic cross-version renaming: Optionally detect and rename different versions of the same model or members of a model collection with matching name patterns automatically.
-- Simplifies organization and enhances searchability for efficient access.
-- Shares .civitai.info files compatible with sd-webui-Civitai-Helper to prevent creating additional file clutter
-- Efficient Model Tracking: Identify previously processed models to streamline processing and eliminate redundant work in FileRAVEN.
-- Embedding Differentiation: Ensure human-readability and function by using embedding-specific naming strategies that avoid spaces or underscores while maintaining triggerword distinctiveness to prevent misinterpretation by CLIP.
-- Model Type Differentiation: Distinguishes between various model types such as base model checkpoints, LoRAs, Textual Inversions, Hypernetworks, etc. Allowing for model-type specific behavior such as type-specific naming templates and sorting.
-- Automatic preview image download
+- Developed with Python 3.12 for stability and cross-platform compatibility.
+- **Automatically annotates and renames files:** Retrieves model information from civitai.com and standardizes filenames to include model name, author, version, and base model for easy identification.
+- **Review/preview Model Information Pages:** The CivitAI Model Page is displayed, allowing the user to verify accuracy and make informed decisions regarding renaming.
+- **Cluster Renaming:** Automatically renames all associated files (.civitai.info; .preview.png; etc.). Users have the opportunity to fine-tune the name before renaming occurs.
+- **Automatic cross-version renaming:** Optionally detect and rename different versions of the same model or members of a model collection with matching name patterns automatically.
+- **Standardizes and Simplifies:** helps organization and enhances searchability for efficient access.
+- **Compatibility** Shares .civitai.info files compatible with sd-webui-Civitai-Helper to prevent creating additional file clutter and allow interoperability
+- **Efficient Model Tracking:** Identify previously processed models to streamline processing and eliminate redundant work in FileRAVEN.
+- **Embedding Specific Naming:** Ensure human-readability and function by using embedding-specific naming strategies that avoid spaces or underscores while maintaining triggerword distinctiveness to prevent misinterpretation by CLIP.
+- **Model Type Differentiation:** Distinguishes between various model types such as base model checkpoints, LoRAs, Textual Inversions, Hypernetworks, etc. Allowing for model-type specific behavior such as type-specific naming templates and sorting.
+- **Automatic Preview Image Download:** Automatically searches for and downloads a thumbnails from civitai.com, if available.
 
 ## Future Features:
 - **Customizable Naming Formulae:** Allow users to define naming formulas specific to different model types (e.g., checkpoint merges, LoRAs, textual inversions) for better organization and clarity.
@@ -36,6 +36,7 @@
 - **Automatic Model Updates:** Search for new versions of existing models and automatically download and rename them according to the naming template of the previous version. User choice between keeping or overwriting the old model.
 - **Model Database Management:** Create a model database to efficiently manage and locate local files, enhancing overall file organization and retrieval.
 - **Customizable Source List:** Provide for full integration of additional user-customizable model sources such as Hugging Face.
+- **Automatic Preview Image Generation:** User configures their preferred stable-diffusion UI to automatically generate preview images for models that lack one, utilizing model metadata as a basis for the generated image.
 
 ## Integration Plans: 
 Extensions, nodes, plugins, etc. for:
