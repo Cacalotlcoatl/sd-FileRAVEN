@@ -38,6 +38,7 @@
 - **Model Database Management**: Create a model database to efficiently manage and locate local files, enhancing overall file organization and retrieval.
 - **Customizable Source List**: Provide for full integration of additional user-customizable model sources such as Hugging Face.
 - **Automatic Preview Image Generation**: User configures their preferred stable-diffusion UI to automatically generate preview images for models that lack one, utilizing model metadata as a basis for the generated image.
+- **Other Paradigms**: Forked projects to handle files and models for other similar software ecosystems.
 
 ## Integration Plans: 
 Extensions, nodes, plugins, etc. for:
@@ -63,7 +64,7 @@ To address this, I began to standardize my model names when downloading new mode
 
 Inspired by Civitai-Helper and motivated by the desire to streamline my process and to begin learning Python, I decided to address both of my issues simultaneously. I embarked on creating a program that would not only tackle my own organizational challenges but also serve as a learning platform for me to learn Python. Thus, sd-fileRAVEN was born.
 
-As I refined my project plan, my initial vision for sd-fileRAVEN, once confined to renaming, took flight. It soared to new heights as I reconceptualized it as a versatile and robust model-management application. This is a bit of an extreme challenge for a beginner programmer, but I believe that, with the support of the open-source community (as well as crash-course learning and intensive tutoring by Llama 2), the dream of sd-fileRAVEN can be achieved. My goal is to create a comprehensive solution that will tackle the various model-management obstacles faced by Stable Diffusion users. I am certain that sd-fileRAVEN will become an indispensible asset for individuals looking for improved organization and clarity within their model library.
+As I refined my project plan, my initial vision for sd-fileRAVEN, once confined to renaming, exploded as I reconceptualized the program to be more than just a useful script, but rather a comprehensive, versatile, and robust model-management application. I realize that this project is extremely ambitious, especially for a new developer, but I thrive in a challenge, so let's do this! I believe that, with the support of the open-source community (as well as crash-course learning and ai coding assistants), the dream of sd-fileRAVEN can be achieved. My goal is to create a comprehensive solution that will tackle the various model-management obstacles faced by Stable Diffusion users. I am certain that sd-fileRAVEN will become an indispensible asset for individuals looking for improved organization and clarity within their model library.
 
 In summary, sd-fileRAVEN represents my commitment to not only resolving my personal challenges but also contributing to the broader community of Stable Diffusion enthusiasts by providing a robust and versatile solution.
 
