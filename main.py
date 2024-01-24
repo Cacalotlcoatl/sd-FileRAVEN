@@ -66,9 +66,17 @@ def concatenate_model_name(name_pattern, **kwargs):
 
 
 def lookup_model_info_localfile(model_name, model_path):
+    return
 
 # function lookup model information from local info file
-
+def lookup_model_info_civitai(model_url, model_id, model_sh256):
+    # if model_id is known, skip search, otherwise lookup model info from
+    # civitai
+    # query REST API endpoint with sha256
+    # get model_id from response
+    # If no model_id is found, go to edit_model_info dialogue and skip search
+    # lookup model info from civitai using model_id
+    return
 # select files to process
 # determine naming pattern
 # display proposed name and ask for permission to rename the model
