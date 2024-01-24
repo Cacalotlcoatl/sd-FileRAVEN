@@ -1,9 +1,8 @@
-"""
-Resources:
-reST api Tutorial: https://restfulapi.net/
-REST HTTP Status Codes: https://restfulapi.net/http-status-codes/
-Civitai REST API https://github.com/civitai/civitai/wiki/REST-API-Reference
-"""
+# Resources:
+# reST api Tutorial: https://restfulapi.net/
+# REST HTTP Status Codes: https://restfulapi.net/http-status-codes/
+# Civitai REST API https://github.com/civitai/civitai/wiki/REST-API-Reference
+
 # UTTER CHAOS!!! 
 # TODO: Sort new and old code snippets, index and standardize and stabilize variables, resequence for clarity
 
