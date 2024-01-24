@@ -2,7 +2,7 @@
 
 ### (Reader-friendly Application for Validated Entity Naming)
 
-Developed by Brian Conroy
+# Developed by Brian Conroy
 <br>Date of initial commit: December 15, 2023
 
 **sd-FileRAVEN** is a cross-platform utility designed to assist users in
@@ -196,6 +196,45 @@ response = requests.get(base_url, params=query_params)
 >
 
 #### 2. equivalent variables
+
+Equivalency Chart
+
+fileRAVEN Civitai API Type Description
+model_page_url1 string The URL of the model page on Civitai.com
+model_page_url2 string The URL of the model page on HuggingFace.co
+model_256 string The SH256 hash of the model
+model_id id number The identifier for the model
+model_name string The name of the model (fileRAVEN name)
+model_title string The title of the model from the model page
+model_src_name name string The name of the model
+description string The description of the model (HTML)
+model_type type enum The model type: (Checkpoint, TextualInversion,
+Hypernetwork, AestheticGradient, LORA, Controlnet, Poses)
+model_nsfw nsfw boolean Whether the model is NSFW or not
+model_real model.poi boolean Whether the model is of a person of interest (real
+person) or not
+model_tags tags string[]            The tags associated with the model
+model_author creator.username string The name of the creator
+model_ver_id modelVersions.id number The identifier for the model version
+model_version modelVersions.name string The name of the model version
+model_file_url modelVersions.downloadUrl string The download url to get the
+model file for this specific version
+model_triggers modelVersions.trainedWords string[]            The words used to
+trigger the model
+model_prime modelVersions.files.primary boolean | undefined If the file is the
+primary file for the model version
+model_fp modelVersions.files.metadata.fp enum | undefined The specified floating
+point for the file: (fp16, fp32)
+model_size modelVersions.files.metadata.size enum | undefined The specified
+model size for the file: (full, pruned)
+model_thumb_id modelVersions.images.id string The id for the image
+model_thumb_url modelVersions.images.url string The url for the image
+model_thumb_nsfw modelVersions.images.nsfw string Whether or not the image is
+NSFW (note: if the model is NSFW, treat all images on the model as NSFW)
+model_thumb_w modelVersions.images.width number The original width of the image
+model_thumb_h modelVersions.images.height number The original height of the
+image
+model_blur modelVersions.images.hash string The blurhash of the image
 
 #### 3. default values
 
