@@ -14,6 +14,8 @@ import os
 import requests  # for making http request
 from bs4 import BeautifulSoup  # for scraping webpages
 
+from ui import initialize_gui
+
 
 # function generate sh256 or blurhash from target file
 def generate_hash(hashfile, hash_method):
@@ -106,6 +108,12 @@ def get_modelpage_title(model_id):
     print(title)
     return
 
+
+# MAIN LOOP
+# Initialize the gui
+initialize_gui()
+
+# call Main Menu
 # select files to process
 # determine naming pattern
 # display proposed name and ask for permission to rename the model
