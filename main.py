@@ -11,6 +11,9 @@ import hashlib
 # import required modules
 import os
 
+import requests  # for making http request
+from bs4 import BeautifulSoup  # for scraping webpages
+
 
 # function generate sh256 or blurhash from target file
 def generate_hash(hashfile, hash_method):
@@ -66,6 +69,19 @@ def concatenate_model_name(name_pattern, **kwargs):
 
 
 def lookup_model_info_localfile(model_name, model_path):
+    # model info file {model_path)+{model_name}+".civitai.info"
+    localfile_name = model_path + model_name + ".civitai.info"
+    while localfile_name:
+        if os.path.exists(localfile_name):
+            with open(localfile_name, 'r') as file:
+                model_info = file.read()
+            return model_info
+        else:
+            error('File not found: ' + localfile_name)
+        return
+
+
+while
     return
 
 # function lookup model information from local info file
@@ -77,6 +93,19 @@ def lookup_model_info_civitai(model_url, model_id, model_sh256):
     # If no model_id is found, go to edit_model_info dialogue and skip search
     # lookup model info from civitai using model_id
     return
+
+
+def get_modelpage_title(model_id):
+    url = 'https://civitai.com/models/{model_id}/'
+    response = requests.get(url)
+    html_content = response.content
+
+    soup = BeautifulSoup(html_content, 'html.parser')
+    title = soup.title.string
+
+    print(title)
+    return
+
 # select files to process
 # determine naming pattern
 # display proposed name and ask for permission to rename the model

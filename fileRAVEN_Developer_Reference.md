@@ -21,13 +21,13 @@ application proves to be an invaluable asset for model management.
 #### project/
 
 1. **Launcher**  fileRAVEN.bat
-3. **Main Module**  main.py
+   2**Main Module**  main.py
     1. **Main Configuration**  fileRAVEN.config
-4. **GUI Module**  ui.py
+2. **GUI Module**  ui.py
     1. **Streamlit** Standalone framework
     2. **Streamlit** Extension framework
-    2. **Gradio** Extension framework
-4. **Integrations Module** integration/
+   3. **Gradio** Extension framework
+3. **Integrations Module** integration/
     1. Active Development
     2. Future Development
         1. [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
@@ -56,11 +56,11 @@ application proves to be an invaluable asset for model management.
         - [~~Japanese Stable
           Diffusion~~](https://github.com/rinnakk/japanese-stable-diffusion)
           Dead project?
-5. **File IO Module**  fileRAVEN_manager.py
+4. **File IO Module**  fileRAVEN_manager.py
 5. **Lookup Module**  fileRAVEN_remote.py
     1. **Lookup Module Configuration**  fileRAVEN_remote.config
     2. **API Keyring** fileRAVEN_remote.keyring
-5. **Templates** templates/
+6. **Templates** templates/
     1. base.html
     2. model.html
     3. style.css
@@ -199,34 +199,35 @@ response = requests.get(base_url, params=query_params)
 
 Equivalency Chart
 
-| fileRAVEN        | Civitai API                       | Type                                                  | Description                                                                                              |
-|------------------|-----------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| model_page_url1  |                                   | string                                                | The URL of the model page on Civitai.com                                                                 |
-| model_page_url2  |                                   | string                                                | The URL of the model page on HuggingFace.co                                                              |
-| model_256        |                                   | string                                                | The SH256 hash of the model                                                                              |
-| model_id         | id                                | number                                                | The identifier for the model                                                                             |
-| model_name       |                                   | string                                                | The name of the model (fileRAVEN name)                                                                   |
-| model_title      |                                   | string                                                | The title of the model from the model page html                                                          
-| model_src_name   | name                              | string                                                | The name of the model from source. This is to facilitate reversion to default naming.                    |
-| model_desc       | description                       | string                                                | The description of the model (HTML)                                                                      |
-| model_type       | type                              | enum                                                  | The model type: (Checkpoint, TextualInversion, Hypernetwork, AestheticGradient, LORA, Controlnet, Poses) 
-| model_nsfw       | nsfw                              | boolean                                               | Whether the model is NSFW or not                                                                         |
-| model_real       | model.poi                         | boolean                                               | Whether the model depicts a person of interest (real person) or not                                      |
-| model_tags       | tags                              | string[]                                              | The tags associated with the model                                                                       |
-| model_credit     | creator.username                  | string                                                | The name of the creator or uploader                                                                      |
-| model_ver_id     | modelVersions.id                  | number                                                | The identifier for the model version                                                                     |
-| model_version    | modelVersions.name                | string                                                | The name of the model version                                                                            |
-| model_file_url   | modelVersions.downloadUrl         | string                                                | The download url to get the model file for this specific version                                         
-| model_triggers   | modelVersions.trainedWords        | string[]                                              | The words used to trigger the model                                                                      |
-| model_prime      | modelVersions.files.primary       | boolean \| undefined                                  | If the file is the primary file for the model version                                                    
-| model_fp         | modelVersions.files.metadata.fp   | enum                        \| undefined              | The specified floating point for the file: (fp16, fp32)                                                  |
-| model_size       | modelVersions.files.metadata.size | enum                                     \| undefined | The specified model size for the file: (full, pruned)                                                    | 
-| model_thumb_     | id modelVersions.images.id        | string                                                | The id for the image                                                                                     |
-| model_thumb_url  | modelVersions.images.url          | string                                                | The url for the image                                                                                    |
-| model_thumb_nsfw | modelVersions.images.nsfw         | string                                                | Whether or not the image is                                                                              
-| model_thumb_w    | modelVersions.images.width        | number                                                | The original width of the image                                                                          |
-| model_thumb_h    | modelVersions.images.height       | number                                                | The original height of the image                                                                         |
-| model_blur       | modelVersions.images.hash         | string                                                | The blurhash of the image                                                                                |
+| fileRAVEN        | Civitai API                       | Type                                                  | Description                                                                                               |
+|------------------|-----------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| model_info       |                                   | string                                                | The un-separated model information from remote source                                                     |
+| model_page_url1  |                                   | string          <br/>                                 | The URL of the model page on Civitai.com                                                                  |
+| model_page_url2  |                                   | string                                                | The URL of the model page on HuggingFace.co                                                               |
+| model_256        |                                   | string                                                | The SH256 hash of the model                                                                               |
+| model_id         | id                                | number                                                | The identifier for the model                                                                              |
+| model_name       |                                   | string                                                | The name of the model (fileRAVEN name)                                                                    |
+| model_title      |                                   | string                                                | The title of the model from the model page html                                                           |
+| model_src_name   | name                              | string                                                | The name of the model from source. This is to facilitate reversion to default naming.                     |
+| model_desc       | description                       | string                                                | The description of the model (HTML)                                                                       |
+| model_type       | type                              | enum                                                  | The model type: (Checkpoint, TextualInversion, Hyper-network, AestheticGradient, LORA, Controlnet, Poses) |
+| model_nsfw       | nsfw                              | boolean                                               | Whether the model is NSFW or not                                                                          |
+| model_real       | model.poi                         | boolean                                               | Whether the model depicts a person of interest (real person) or not                                       |
+| model_tags       | tags                              | string[]                                              | The tags associated with the model                                                                        |
+| model_credit     | creator.username                  | string                                                | The name of the creator or uploader                                                                       |
+| model_ver_id     | modelVersions.id                  | number                                                | The identifier for the model version                                                                      |
+| model_version    | modelVersions.name                | string                                                | The name of the model version                                                                             |
+| model_file_url   | modelVersions.downloadUrl         | string                                                | The download url to get the model file for this specific version                                          |
+| model_triggers   | modelVersions.trainedWords        | string[]                                              | The words used to trigger the model                                                                       |
+| model_prime      | modelVersions.files.primary       | boolean \| undefined                                  | If the file is the primary file for the model version                                                     |
+| model_fp         | modelVersions.files.metadata.fp   | enum                        \| undefined              | The specified floating point for the file: (fp16, fp32)                                                   |
+| model_size       | modelVersions.files.metadata.size | enum                                     \| undefined | The specified model size for the file: (full, pruned)                                                     | 
+| model_thumb_     | id modelVersions.images.id        | string                                                | The id for the image                                                                                      |
+| model_thumb_url  | modelVersions.images.url          | string                                                | The url for the image                                                                                     |
+| model_thumb_nsfw | modelVersions.images.nsfw         | string                                                | Whether or not the image is                                                                               |
+| model_thumb_w    | modelVersions.images.width        | number                                                | The original width of the image                                                                           |
+| model_thumb_h    | modelVersions.images.height       | number                                                | The original height of the image                                                                          |
+| model_blur       | modelVersions.images.hash         | string                                                | The blurhash of the image                                                                                 |
 
 #### 3. default values
 
@@ -234,7 +235,7 @@ Equivalency Chart
 
 #### TODO: all
 
-* Figure out how to add new database api data programatically. Probably
+* Figure out how to add new database api data programmatically. Probably
   manually through a configuration window.
   <br>*Note to self: if there's no API it's not my problem. I'm not doing custom
   code for every website out there hosting models. Don't make this harder
@@ -248,7 +249,7 @@ Equivalency Chart
 
 For each remote source, a key will be added to the ring with a number equal
 to the source's id number in the local installation. The key will then be
-encrypted using a basic method and stored with it's key.
+encrypted using a basic method and stored with its key.
 
 ##### 2. Encryption
 
@@ -376,8 +377,8 @@ encrypted using a basic method and stored with it's key.
             - modelVersions.images. number	    The original height of the image
                 height
 
-2. Launch Options
-3. Model Identification
+1. Launch Options
+2. Model Identification
     1. If the model does not have a model-page stored in its _\<model\>.info_,
        _\<model\>.civitai.info_, or _\<model\>.json_ files fileRAVEN will search
        through the configured remote databases to find a model-page.
@@ -395,27 +396,27 @@ encrypted using a basic method and stored with it's key.
        same rules as above, as applicable.
     5. If there are still no matches, the program will search by all known
        searchable information (i.e. author_name, title, model_name,
-       current_file_name, etc.) on all configured databases).
-    4. If the _SHA-256_ search returns a unique result, that model's information
+       current_file_name, etc. on all configured databases).
+   6. If the _SHA-256_ search returns a unique result, that model's information
        from the model-page will be loaded into the appropriate **model_info**
        fields, **NOTE:** Do not overwrite existing data without
        user confirmation!
-    5. If there are multiple results from the _SHA-256_ search; or multiple
+   7. If there are multiple results from the _SHA-256_ search; or multiple
        results from the _CRC32_ search **_and_** no results from the _SHA-256_
        search;
        or there were no results from both the _CRC32_ and _SHA-256_
        searches, the results of all the subsequent searches will be
        presented for the user to select and confirm the correct model from the
        results (allowing for an option for "none-of-the-above")
-    6. If no matching model is found on the remote databases, the user will
+   8. If no matching model is found on the remote databases, the user will
        be asked to supply what model information they can through the **"Edit
        Model Information"** dialogue.
-    7. If searchable information is entered by the user that was not
+   9. If searchable information is entered by the user that was not
        present before, the remote search should be automatically performed
        again.
-    8. If the second search produces no results, proceed to **name_approval**,
+   10. If the second search produces no results, proceed to **name_approval**,
        using available information to fill the template or
-       redisplaying the current filename if no information is available.
-    9. If the second search produces a unique result, load the model-page
+       re-displaying the current filename if no information is available.
+   11. If the second search produces a unique result, load the model-page
        into **model_info** as above.
-    10. If the second search produces multiple results, go to  **_vii_** above.
+   12. If the second search produces multiple results, go to  **_vii_** above.
