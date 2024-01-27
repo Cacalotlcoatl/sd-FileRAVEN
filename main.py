@@ -109,6 +109,73 @@ def get_modelpage_title(model_id):
     return
 
 
+# translate_1337 is to translate text from english to or from 1337. This is a
+# simple version to start with. In order to be more robust the translator
+# should check against a dictionary for deleeting and include a more
+# complete 1337 cypher.
+def translate_1337(text):
+    leet_map = {
+        'A': '4',
+        'a': '4',
+        'E': '3',
+        'e': '3',
+        'G': '9',
+        'g': '9',
+        'L': '1',
+        'l': '1',
+        'O': '0',
+        'o': '0',
+        'S': '5',
+        's': '5',
+        'T': '7',
+        't': '7'
+    }
+
+    leet_map_reverse = {
+        '4': 'A',
+        '3': 'E',
+        '9': 'G',
+        '1': 'L',
+        '0': 'O',
+        '5': 'S',
+        '7': 'T'
+    }
+
+    if to_1337:
+        return ''.join(leet_map.get(c, c) for c in text)
+    else:
+        return ''.join(leet_map_reverse.get(c, c) for c in text)
+
+    # def deleet (text):
+    import nltk
+    nltk.download('words')
+
+    from nltk.corpus import words
+
+    english_words = set(words.words())
+
+    def translate_from_1337_to_english(text):
+        leet_map_reverse = {
+            '4': 'A',
+            '3': 'E',
+            '9': 'G',
+            '1': 'L',
+            '0': 'O',
+            '5': 'S',
+            '7': 'T'
+        }
+
+        english_text = ''.join(leet_map_reverse.get(c, c) for c in text)
+
+        # Check against the English dictionary
+        decoded_words = []
+        for word in english_text.split():
+            if word.lower() in english_words:
+                decoded_words.append(word)
+            else:
+                decoded_words.append(f'[{word}]')
+
+        return ' '.join(decoded_words)
 # MAIN LOOP
 # Initialize the gui
 initialize_gui()

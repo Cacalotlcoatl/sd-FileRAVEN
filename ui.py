@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import ttk
+from tkinter.messagebox import askokcancel, showinfo, WARNING
 
 
 class GUI:
@@ -46,7 +48,7 @@ class GUI:
         print("Edit Naming Scheme Editor button clicked")
 
 
-class Sd_models:
+class SdModels:
     def __init__(self, master):
         self.master = master
         self.master.title("File Selection")
@@ -71,6 +73,35 @@ class Sd_models:
                                                               "*.pt")))
         print("Selected file:", file_path)
 
+
+# General purpose interactive function
+def ask_ok(aoktitle, aokprompt, ok_button_text, cancel_button_text,
+           aok_success_text
+           ):
+    # create the root window
+    root = tk.Tk()
+    root.title(aoktitle)
+    root.geometry('300x150')
+
+    # click event handler
+
+    answer = askokcancel(
+        title=aoktitle,
+        message=askokprompt,
+        icon=WARNING)
+
+    if answer:
+        showinfo(
+            title=aoktitle,
+            message=(aok_success_text)
+
+        ttk.Button(
+            root,
+            text='',
+            (command=confirm).pack(expand=True)
+
+        # start the app
+        root.mainloop()
 
 #
 # ------------------------------------------------------------------------------
