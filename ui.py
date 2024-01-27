@@ -1,114 +1,51 @@
-import tkinter as tk
-from tkinter import filedialog
-from tkinter import ttk
-from tkinter.messagebox import askokcancel, showinfo, WARNING
+import streamlit as st
 
 
 class GUI:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("fileRAVEN-Lite")
-        self.master.geometry("400x300")
+    def __init__(self):
+        """
+        Initializes the class instance and sets up the title "fileRAVEN-Lite".
+        Renders the main menu.
+        """
+        st.title("fileRAVEN-Lite")
 
         # Draw the main menu
         self.render_main_menu()
 
     def render_main_menu(self):
-        menu_frame = tk.Frame(self.master)
-        menu_frame.pack(pady=100)
+        """
+        Renders the main menu with buttons to select a model or folder, edit
+        naming schemes, and quit to desktop.
+        """
+        select_model_button = st.button("Select Model/s or Folder")
+        if select_model_button:
+            self.on_select_model_click()
 
-        select_model_button = tk.Button(menu_frame,
-                                        text="Select Model/s or Folder",
-                                        command=self.on_select_model_click)
-        select_model_button.pack(pady=10)
+        edit_naming_button = st.button("Edit Naming Schemes")
+        if edit_naming_button:
+            self.on_edit_naming_click()
 
-        edit_naming_button = tk.Button(menu_frame, text="Edit Naming Schemes",
-                                       command=self.on_edit_naming_click)
-        edit_naming_button.pack(pady=10)
-
-        quit_button = tk.Button(menu_frame, text="Quit to Desktop",
-                                command=self.master.quit)
-        quit_button.pack(pady=10)
+        quit_button = st.button("Quit to Desktop")
+        if quit_button:
+            st.stop()
 
     def on_select_model_click(self):
-        file_path = filedialog.askopenfilename(initialdir="/",
-                                               title="Select SD_model file",
-                                               filetypes=(("SAFETENSORS files",
-                                                           "*.safetensors"),
-                                                          ("Checkpoint files",
-                                                           "*.ckpt"),
-                                                          ("Binary files",
-                                                           "*.bin"),
-                                                          ("PyTorch files",
-                                                           "*.pt")))
-        print("Selected file:", file_path)
+        """
+        Function to handle the click event for selecting a model. It prompts
+        the user to upload
+        a specific type of file and then displays the selected file.
+        """
+        file_path = st.file_uploader("Select SD_model file",
+                                     type=["safetensors", "ckpt", "bin", "pt"])
+        if file_path:
+            st.write("Selected file:", file_path)
 
     def on_edit_naming_click(self):
-        # Add logic for naming scheme editor
-        print("Edit Naming Scheme Editor button clicked")
+        """
+        Add logic for naming scheme editor
+        """
+        st.write("Edit Naming Scheme Editor button clicked")
 
 
-class SdModels:
-    def __init__(self, master):
-        self.master = master
-        self.master.title("File Selection")
-        self.master.geometry("400x200")
-
-        # Create a button to open the file picker
-        pick_button = tk.Button(self.master, text="Pick File",
-                                command=self.pick_file)
-        pick_button.pack(pady=20)
-
-    def pick_file(self):
-        file_path = filedialog.askopenfilename(initialdir="/",
-                                               title="Select SD_model file",
-                                               filetypes=(("SAFETENSORS files",
-                                                           "*.safetensors"), (
-                                                              "Checkpoint "
-                                                              "files",
-                                                              "*.ckpt"), (
-                                                              "Binary files",
-                                                              "*.bin"), (
-                                                              "PyTorch files",
-                                                              "*.pt")))
-        print("Selected file:", file_path)
-
-
-# General purpose interactive function
-def ask_ok(aoktitle, aokprompt, ok_button_text, cancel_button_text,
-           aok_success_text
-           ):
-    # create the root window
-    root = tk.Tk()
-    root.title(aoktitle)
-    root.geometry('300x150')
-
-    # click event handler
-
-    answer = askokcancel(
-        title=aoktitle,
-        message=askokprompt,
-        icon=WARNING)
-
-    if answer:
-        showinfo(
-            title=aoktitle,
-            message=(aok_success_text)
-
-        ttk.Button(
-            root,
-            text='',
-            (command=confirm).pack(expand=True)
-
-        # start the app
-        root.mainloop()
-
-#
-# ------------------------------------------------------------------------------
-
-# Initialize the GUI
-root = tk.Tk()
-app = GUI(root)
-
-# Run the main loop to keep the window open
-root.mainloop()
+# Initialize the Streamlit app
+gui = GUI()
