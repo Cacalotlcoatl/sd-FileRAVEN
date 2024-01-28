@@ -21,8 +21,8 @@ application proves to be an invaluable asset for model management.
 #### project/
 
 1. **Launcher**  fileRAVEN.bat
-   2**Main Module**  main.py
-    1. **Main Configuration**  fileRAVEN.config
+2. **Configuration**  fileRAVEN.config
+2. **Main Module**  main.py
 2. **GUI Module**  ui.py
     1. **Streamlit** Standalone framework
     2. **Streamlit** Extension framework
@@ -84,9 +84,93 @@ launch options and start main.py.
 - default launch configuration
 - enumerate config options
 - list dependencies
-
 ---
 
+### 2. fileRAVEN.conf (Configuration file)
+
+A. Sections
+1. Main program
+2. UI configuration
+a. Language
+b. Localisation files location
+c. Theme    
+3. File System configuration
+a. fileRAVEN Moves files? [y/n]
+b. fileRAVEN database path
+c. path to model library
+1. path to downloaded files
+2. path to stable-diffusion models
+3. path to LoRA models
+4. path to LyCORIS models
+5. path to textual-inversion models
+6. path to aesthetic gradient models
+7. path to controlnet models
+8. path to adetailer models
+9. other paths (user defined)
+4. Naming Schemes
+a. Checkpoint
+b. LoRA/LyCO
+1. Art styles
+2. Artist styles
+3. Character
+4. (Real) Person
+5. Location
+6. Action
+7. Expression
+8. Slider
+c. Textual-Inversion
+1. Art styles
+2. Artist styles
+3. Character
+4. (Real) Person
+5. Location
+6. Action
+7. Expression
+8. Negative
+d. Aesthetic Gradient
+e. Hypernetwork
+1. Art styles
+2. Artist styles
+3. Character
+4. (Real) Person
+5. Location
+6. Action
+7. Expression
+f. Pose (NOT YET IMPLEMENTED)
+g. Wildcards (NOT YET IMPLEMENTED)
+5. Naming Options
+a. leet_mode (default: 'embed')
+1. '1337' - all files are spelled using 1337
+2. 'static' - filenames that are 1337 stay 1337; Filenames with
+standard spelling stay standard, default to standard.
+3. 'embed' - textual inversion embeddings use 1337, all
+other models use standard spelling.
+4. 'standard' - all filenames are spelled using standard. The
+de-leet function is used to help the user.
+b. NSFW flags (default: 'NSFW', 'SAFE')
+c. NSFW Failsafe [boolean] (default: 0) - Controls the default
+behavior for mature content in character models.
+1. When set to 0, it assumes all models are NSFW unless
+explicitly defined as 'SFW'.
+2. When set to 1, it assumes all models are SFW unless
+explicitly defined as 'NSFW'.
+d. POI Failsafe [boolean] (default: 0) - Controls the default behavior
+for "People of Interest" (POI) in character models.
+1. When set to 1, it assumes all character models are of real
+people unless explicitly defined otherwise.
+2. When set to 0, it assumes all character models are fictitious
+unless explicitly defined as real.
+e. POI flags (default: 'REAL', 'NaRP')
+f. Stable-diffusion ecosystems
+1, sd_version
+a. stable-diffusion 1'simple' - uses
+
+    Training Model # Use the name of the training model (for
+    LoRAs and embeddings) implement later. Unnecessary for now.
+    Stable Diffusion Version flags # Distinguish between stable-diffusion versions with these flags, e.g. "SD1", "SDXL", etc.
+
+            
+---
 ### 2. Main Module (main.py)
 
 main.py controls program flow, data flow, and performs all logical
@@ -181,8 +265,6 @@ TODO: Followup and complete civitai.com api configuration
 > 'api_search_by_hash': "GET /api/v1/models?hash={hash_value}"<br>
 > 'api_key_
 > search_hash-256': ''
-> search_hash-crc32: ''
-> import requests
 
 base_url = "https://api.civitai.co/api/v1/models"
 query_params = {
@@ -199,46 +281,84 @@ response = requests.get(base_url, params=query_params)
 
 Equivalency Chart
 
-| fileRAVEN               | Civitai API                       |                         Type                          | Description                                                                                               |
-|-------------------------|:----------------------------------|:-----------------------------------------------------:|-----------------------------------------------------------------------------------------------------------|
-| model_path              |                                   |                        string                         | the path to the model                                                                                     |
-| model_file              |                                   |                        string                         | the current filename of the model on disk                                                                 |
-| model_info              |                                   |                        string                         | The un-processed model information from remote source                                                     |
-| model_info_json         |                                   |                      dictionary                       | The JSON representation of the model information                                                          |
-| model_page_url1         |                                   |                        string                         | The URL of the model page on Civitai.com                                                                  |
-| model_page_url2         |                                   |                        string                         | The URL of the model page on HuggingFace.co                                                               |
-| model_256               |                                   |                        string                         | The SH256 hash of the model                                                                               |
-| model_id                | id                                |                        number                         | The identifier for the model                                                                              |
-| model_name              |                                   |                        string                         | The name of the model (fileRAVEN name)                                                                    |
-| model_title             |                                   |                        string                         | The title of the model from the model page html (h1 header)                                               |
-| model_src_name          | name                              |                        string                         | The name of the model from source. This is to facilitate reversion to default naming.                     |
-| model_desc              | description                       |                        string                         | The description of the model (HTML)                                                                       |
-| model_type              | type                              |                         enum                          | The model type: (Checkpoint, TextualInversion, Hyper-network, AestheticGradient, LORA, Controlnet, Poses) |
-| model_nsfw              | nsfw                              |                        boolean                        | Whether the model is NSFW or not                                                                          |
-| model_real              | model.poi                         |                        boolean                        | Whether the model depicts a person of interest (real person) or not                                       |
-| model_tags              | tags                              |                       string[]                        | The tags associated with the model                                                                        |
-| model_credit            | creator.username                  |                        string                         | The name of the creator or uploader                                                                       |
-| model_ver_id            | modelVersions.id                  |                        number                         | The identifier for the model version                                                                      |
-| model_version           | modelVersions.name                |                        string                         | The name of the model version                                                                             |
-| model_file_url          | modelVersions.downloadUrl         |                        string                         | The download url to get the model file for this specific version                                          |
-| model_triggers          | modelVersions.trainedWords        |                       string[]                        | The words used to trigger the model                                                                       |
-| model_prime             | modelVersions.files.primary       |                 boolean \| undefined                  | If the file is the primary file for the model version                                                     |
-| model_fp                | modelVersions.files.metadata.fp   |       enum                        \| undefined        | The specified floating point for the file: (fp16, fp32)                                                   |
-| model_size              | modelVersions.files.metadata.size | enum                                     \| undefined | The specified model size for the file: (full, pruned)                                                     | 
-| model_thumb_            | id modelVersions.images.id        |                        string                         | The id for the image                                                                                      |
-| model_thumb_url         | modelVersions.images.url          |                        string                         | The url for the image                                                                                     |
-| model_thumb_nsfw        | modelVersions.images.nsfw         |                        string                         | Whether or not the image is                                                                               |
-| model_thumb_w           | modelVersions.images.width        |                        number                         | The original width of the image                                                                           |
-| model_thumb_h           | modelVersions.images.height       |                        number                         | The original height of the image                                                                          |
-| model_blur              | modelVersions.images.hash         |                        string                         | The blurhash of the image                                                                                 |
-| model_permit_credit     |                                   |                        boolean                        | This model permits users to use the model without crediting the creator                                   |
-| model_permit_sell       |                                   |                        boolean                        | This model permits users to sell the images they generate                                                 |
-| model_permit_comgen     |                                   |                        boolean                        | This model permits users to run on services that generatel images for money                               |
-| model_permit_civgen     |                                   |                        boolean                        | This model permits users to generate iumages on Civitai                                                   |
-| model_permit_sharemerge |                                   |                        boolean                        | This model permits users to share merges <br/>using this model                                            |
-| model_permit_sellmerge  |                                   |                        boolean                        | This model permits users to sell this model or merges using this model                                    |
-| model_permit_different  |                                   |                        boolean                        | This model permits users to have different permissions when sharing merges                                |
+| fileRAVEN               | Civitai API                       |                         Type                          | Description                                                                                                                                                                                           |
+|-------------------------|:----------------------------------|:-----------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| model_path              |                                   |                        string                         | the path to the model                                                                                                                                                                                 |
+| model_file              |                                   |                        string                         | the current filename of the model on disk                                                                                                                                                             |
+| model_info              |                                   |                        string                         | The un-processed model information from remote source                                                                                                                                                 |
+| model_info_json         |                                   |                      dictionary                       | The JSON representation of the model information                                                                                                                                                      |
+| model_page_url1         |                                   |                        string                         | The URL of the model page on Civitai.com                                                                                                                                                              |
+| model_page_url2         |                                   |                        string                         | The URL of the model page on HuggingFace.co                                                                                                                                                           |
+| model_256               |                                   |                        string                         | The SH256 hash of the model                                                                                                                                                                           |
+| model_id                | id                                |                        number                         | The identifier for the model                                                                                                                                                                          |
+| model_name              |                                   |                        string                         | The name of the model (fileRAVEN name)                                                                                                                                                                |
+| model_title             |                                   |                        string                         | The title of the model from the model page html (h1 header)                                                                                                                                           |
+| model_src_name          | name                              |                        string                         | The name of the model from source. This is to facilitate reversion to default naming.                                                                                                                 |
+| model_desc              | description                       |                        string                         | The description of the model (HTML)                                                                                                                                                                   |
+| model_type              | type                              |                         enum                          | The model type: (Checkpoint, TextualInversion, Hyper-network, AestheticGradient, LORA, Controlnet, Poses)                                                                                             |
+| model_base              | baseModel                         |                      enumerated                       | The base model version for the model. ("SD 1.5", "SDXL 1.0", etc.)                                                                                                                                    |
+| model_base_short        |                                   |                      enumerated                       | The abbreviated base model version. Currently:. ('SD1','XL1','SD1-LCM','XL1-TURBO')                                                                                                                   |
+| model_nsfw              | nsfw                              |                        boolean                        | Whether the model is NSFW or not                                                                                                                                                                      |
+| model_real              | model.poi                         |                        boolean                        | Whether the model depicts a person of interest (real person) or not                                                                                                                                   |
+| model_tags              | tags                              |                       string[]                        | The tags associated with the model                                                                                                                                                                    |
+| model_credit            | creator.username                  |                        string                         | The name of the creator or uploader                                                                                                                                                                   |
+| model_ver_id            | modelVersions.id                  |                        number                         | The identifier for the model version                                                                                                                                                                  |
+| model_version           | modelVersions.name                |                        string                         | The name of the model version                                                                                                                                                                         |
+| model_file_url          | modelVersions.downloadUrl         |                        string                         | The download url to get the model file for this specific version                                                                                                                                      |
+| model_triggers          | modelVersions.trainedWords        |                       string[]                        | The words used to trigger the model                                                                                                                                                                   |
+| model_prime             | modelVersions.files.primary       |                 boolean \| undefined                  | If the file is the primary file for the model version                                                                                                                                                 |
+| model_fp                | modelVersions.files.metadata.fp   |       enum                        \| undefined        | The specified floating point for the file: (fp16, fp32)                                                                                                                                               |
+| model_size              | modelVersions.files.metadata.size | enum                                     \| undefined | The specified model size for the file: (full, pruned)                                                                                                                                                 | 
+| model_thumb_            | id modelVersions.images.id        |                        string                         | The id for the image                                                                                                                                                                                  |
+| model_thumb_url         | modelVersions.images.url          |                        string                         | The url for the image                                                                                                                                                                                 |
+| model_thumb_nsfw        | modelVersions.images.nsfw         |                        string                         | Whether or not the image is NSFW                                                                                                                                                                      |
+| model_thumb_w           | modelVersions.images.width        |                        number                         | The original width of the image                                                                                                                                                                       |
+| model_thumb_h           | modelVersions.images.height       |                        number                         | The original height of the image                                                                                                                                                                      |
+| model_blurhash          | modelVersions.images.hash         |                        string                         | The blurhash of the image                                                                                                                                                                             |
+| model_permit_credit     |                                   |                        boolean                        | This model permits users to use the model without crediting the creator                                                                                                                               |
+| model_permit_sell       |                                   |                        boolean                        | This model permits users to sell the images they generate                                                                                                                                             |
+| model_permit_comgen     |                                   |                        boolean                        | This model permits users to run on services that generate images for money                                                                                                                            |
+| model_permit_civgen     |                                   |                        boolean                        | This model permits users to generate images on Civitai                                                                                                                                                |
+| model_permit_sharemerge |                                   |                        boolean                        | This model permits users to share merges <br/>using this model                                                                                                                                        |
+| model_permit_sellmerge  |                                   |                        boolean                        | This model permits users to sell this model or merges using this model                                                                                                                                |
+| model_permit_different  |                                   |                        boolean                        | This model permits users to have different permissions when sharing merges                                                                                                                            |
+| model_collection_name   |                                   |                        string                         | If the model is part of a collection, this string identifies the collection.                                                                                                                          |
+| model_collection_id     |                                   |                        number                         | The id number for the model collection this model is a member of.                                                                                                                                     |
+| model_fr_tags           |                                   |                        string                         | fileRAVEN tags for categorical behavior and sorting into folders.                                                                                                                                     |
+| model_fr_processed      |                                   |                        boolean                        | This model has been processed by fileRAVEN                                                                                                                                                            |
+| model_sort_name         |                                   |                        string                         | The name of the model to be used for searching and sorting. This string is specifically purposed for handling collections and 1337 names. This name should NOT be in plain language and never in 1337 |
 
+## Naming Elements
+
+| variable name    | display name                              | display description                                            | notes                                                                                                                                                                                                                                                                                      |
+|------------------|-------------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| model_id         | 'ID #'                                    | 'The Model ID number used by Civitai to identify the model.'   |                                                                                                                                                                                                                                                                                            |
+| model_name       | 'Name'                                    | 'The current name.'                                            | The existing fileRAVEN filename                                                                                                                                                                                                                                                            | |
+| model_src_name   | 'Name from Source'                        | 'Download name'                                                | This will be the same as the original filename if the default filename from Civitai.                                                                                                                                                                                                       | 
+| model_title      | 'Title'                                   | 'The model title from the Civitai model's page.'               | Taken from the h1 page header  text                                                                                                                                                                                                                                                        |
+| model_type       | 'Type'                                    | The type of the model (checkpoint, LoRA, etc.)                 | This should be abbreviated, "Chk" for checkpoints, "LoRA" for LoRA, "LyCO" for LyCORIS and LyCon, "TI" for textual-inversions, "Hyp" for hypernetworks, "cnet" for controlnet, "Grad" for aesthetic gradients, "Seg" for segmentation models, "AD"  for ADetailer models, "Pose" for poses |
+| model_nsfw       | NSFW?                                     | 'Include a NSFW tag for NSFW models. Null by default if SFW.*' | 'NSFW' or 'SAFE'                                                                                                                                                                                                                                                                           | 
+| model_real       | 'Real person?*'                           | 'Does the model depict a real person?'                         | Customizable in the Configuration settings. Default to 'REAL' and 'NaRP' and not fail-safe.                                                                                                                                                                                                | 
+| model_credit     | 'Creator'                                 | 'The name of the creator or uploader.'                         |                                                                                                                                                                                                                                                                                            | 
+| model_ver_id     | 'Version ID'                              | 'The ID number of the version from Civitai'                    |                                                                                                                                                                                                                                                                                            |
+| model_version    | 'Version Name'                            | 'The name of the version from Civitai'                         |                                                                                                                                                                                                                                                                                            | 
+| model_fp         | 'Floating Point precision (if available)' | fp16 or fp32,                                                  |
+| model_base_model | 'Base Model'                              | 'The base model which the model was trained on'                |                                                                                                                                                                                                                                                                                            |                          
+
+on. '
+"model_base_model abbrev,", "LoRA/LyCO flag",
+"model_permit_credit", "model_permit_sell",
+"model_permit_comgen", "model_permit_civgen",
+"model_permit_sharemerge",
+"model_permit_sellmerge",
+"model_permit_different",
+"model_collection_name", "model_collection_id",
+"model_fr_tags", "model_sort_name"
+| style_format | "Style" | 'Context dependent. Use only if using the
+separate style formats'| Adds "Art by " or "Photography by " to for artist-
+styles. Adds " Style'" for art-styles.|
+
+*These flags can be changed in Configuration
 #### 3. default values
 
 #### 4. options
