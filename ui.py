@@ -70,7 +70,7 @@ Display
             1. Options
                 D. (model_title + ' by ' + model_credit + '.' + 
                     model_base_short + '.' + model_version + '.' + nsfw_flag[
-                    model_nsfw])
+                    model_nsfw])   
                 0. Default: (model_title + ' by ' + model_credit + '.' + 
                     model_base_short + '.' + model_version + '.' + nsfw_flag[
                     model_nsfw])

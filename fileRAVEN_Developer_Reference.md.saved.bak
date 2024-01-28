@@ -21,8 +21,8 @@ application proves to be an invaluable asset for model management.
 #### project/
 
 1. **Launcher**  fileRAVEN.bat
-2. **Main Module**  main.py
-1. **Main Configuration**  fileRAVEN.config
+   2**Main Module**  main.py
+    1. **Main Configuration**  fileRAVEN.config
 2. **GUI Module**  ui.py
     1. **Streamlit** Standalone framework
     2. **Streamlit** Extension framework
@@ -292,6 +292,7 @@ encrypted using a basic method and stored with its key.
 
 #### 1. Default naming strategies:
 
+
 * General
     * Limit filenames to a set of (mostly) universally acceptable characters:
         * Lowercase letters
@@ -299,30 +300,30 @@ encrypted using a basic method and stored with its key.
         * Numbers (0-9)
         * Special characters (underscore, hyphen, period), parenthesis,
         * brackets, braces
-        * Generally compatible characters (i.e. (parenthesis), [brackets], and
-          braces
-        * the user is issued a permanently skippable (session) warning before
-          filesystem operations are performed:
+        * Generally compatible characters (i.e. (parenthesis), [brackets], and braces
+        * the user is issued a permanently skippable (session) warning before filesystem operations are performed:
+        * 
+			** Heads up! **
+		Using parentheses (()), brackets ([]), or braces ({}) in filenames
+		can lead to compatibility issues on some systems or with certain software.
+	
+		* ** FAT32 Restriction: ** These characters aren't allowed on FAT32 file
+		systems, common on older Windows systems and portable drives.
+		*. ** Software Quirks: ** Some older software or scripts might not handle them
+		correctly, causing problems.
+		*. ** Web Compatibility: ** Some web servers or applications might have
+		restrictions on these characters in filenames.
 
-> ### :warning: **Heads up!** :warning:
->* **Using parentheses `(  )`, brackets `[ ]`, or braces `{ }` in filenames**
-   > **can lead to compatibility issues on some systems or with certain
-   software.**
->* **FAT32 Restriction:** These characters aren't allowed on FAT32 file systems,
-   common on older Windows systems and portable drives.
->* **Software Quirks:** Some older software or scripts might not handle them
-   correctly, causing problems.
->* **Web Compatibility:** Some web servers or applications might have
-   restrictions on these characters in filenames.
->### To ensure maximum compatibility, stick to letters, numbers, underscores `_`, periods `.`, and hyphens `-`.
+		To ensure maximum compatibility, stick to letters, numbers, underscores (_),
+		periods (.), and hyphens (-).
 
 			f. Spaces: Issue a brief, permanently skippable warning:
 
-> ### :warning: Warning: :warning:
->    While some systems allow spaces in filenames,
-> they can lead to problems on others (older Windows,
-> web servers, etc.).
-> ### Consider using hyphens `-` instead for universal compatibility.
+	Warning: While some systems allow spaces in filenames,
+	they can lead to problems on others (older Windows, 
+	web servers, etc.). 
+			
+	** Consider using hyphens (-) instead for universal compatibility. **
 
         2. For filename elements (e.g. model_name, version_name, etc.), Strip the elements of any forbidden characters (use a class to define letters allowed and loop through the string adding only allowed characters) before adding them to the proposed new filename
         3. Model types: [(Checkpoint, TextualInversion, Hypernetwork, AestheticGradient, LORA, Controlnet, Poses]
