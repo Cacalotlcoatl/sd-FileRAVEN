@@ -1,7 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-
 class GUI:
     def __init__(self):
         """
@@ -39,8 +38,8 @@ class GUI:
     def on_select_model_click(self):
         """
         Function to handle the click event for selecting a model. It prompts
-        the user to upload
-        a specific type of file and then displays the selected file.
+        the user to upload  a specific type of file and then displays the
+        selected file.
         """
         file_path = st.file_uploader("Select SD_model file",
                                      type=["safetensors", "ckpt", "bin", "pt"])
@@ -51,8 +50,8 @@ class GUI:
         """
         Handle the click event for editing the name scheme.
         Display the naming schemes, the default template for the selected
-        scheme,
-        allow the user to edit literals, and display optional elements as
+        scheme, allow the user to edit literals, and display optional
+        elements as
         buttons.
         """
         schemes = {
@@ -69,8 +68,10 @@ Display
         a. LoRA default template
         b. Dropdown menu with Checkboxes for optional templates
             1. Options
-                0. Default
-                    a. default: (model_title + ' by ' + model_credit + '.' + 
+                D. (model_title + ' by ' + model_credit + '.' + 
+                    model_base_short + '.' + model_version + '.' + nsfw_flag[
+                    model_nsfw])
+                0. Default: (model_title + ' by ' + model_credit + '.' + 
                     model_base_short + '.' + model_version + '.' + nsfw_flag[
                     model_nsfw])
                 1. Action
@@ -85,8 +86,8 @@ Display
             2. If a dropdown item is picked, the template for that option is 
             displayed. If the item has not been customized, the default 
             template is displayed. There is a button to reset to default. For 
-            menu items >0 it displays the template for Option 0. For option 
-            0, it displays the fileRAVEN default template for LoRAs  
+            menu items >0 it sets the template to template_lora[0]. For option 
+            0, it resets to the fileRAVEN default template for LoRAs  
 
 Checkpoint
         b. LoRA/LyCO
@@ -147,7 +148,7 @@ moved_variable = st.slider("Move variable", min_value=1, max_value=10, value=5)
 components.html("<- Back", width=50, height=30)
 components.html("Move", width=50, height=30)
 components.html("Forward ->", width=50, height=30)
-        """
+"""
         st.write("Edit Naming Scheme Editor button clicked")
 
 
@@ -168,6 +169,4 @@ Include in configuration file:
     LoRAs and embeddings) implement later. Unnecessary for now.
     Stable Diffusion Version flags # Distinguish between stable-diffusion 
     versions with these flags, e.g. "SD1", "SDXL", etc.
-    
-    
 '''
