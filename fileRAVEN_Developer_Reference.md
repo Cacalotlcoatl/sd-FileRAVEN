@@ -169,7 +169,7 @@ The ui module will contain code for the various menus and dialogs:
 
 Databases are added through the manage databases dialogue. (Main
 Menu-->Manage Databases-->Add Remote Database) The first will be
-prepopulated for civitai.com. The url will be hashed and the hash will serve
+pre-populated for CivitAI.com. The url will be hashed and the hash will serve
 as the dbase_id for that database.
 > 'dbase_id': <dbase_id>,<br>
 > 'base_url': <https://civitai.com/api/v1/models>
@@ -233,8 +233,8 @@ Equivalency Chart
 | model_blur              | modelVersions.images.hash         |                        string                         | The blurhash of the image                                                                                 |
 | model_permit_credit     |                                   |                        boolean                        | This model permits users to use the model without crediting the creator                                   |
 | model_permit_sell       |                                   |                        boolean                        | This model permits users to sell the images they generate                                                 |
-| model_permit_comgen     |                                   |                        boolean                        | This model permits users to run on services that generatel images for money                               |
-| model_permit_civgen     |                                   |                        boolean                        | This model permits users to generate iumages on Civitai                                                   |
+| model_permit_comgen     |                                   |                        boolean                        | This model permits users to run on services that generated images for money                               |
+| model_permit_civgen     |                                   |                        boolean                        | This model permits users to generate images on Civitai                                                   |
 | model_permit_sharemerge |                                   |                        boolean                        | This model permits users to share merges <br/>using this model                                            |
 | model_permit_sellmerge  |                                   |                        boolean                        | This model permits users to sell this model or merges using this model                                    |
 | model_permit_different  |                                   |                        boolean                        | This model permits users to have different permissions when sharing merges                                |
@@ -316,7 +316,7 @@ encrypted using a basic method and stored with its key.
    restrictions on these characters in filenames.
 >### To ensure maximum compatibility, stick to letters, numbers, underscores `_`, periods `.`, and hyphens `-`.
 
-			f. Spaces: Issue a brief, permanently skippable warning:
+			f. Spaces: Issue a brief, permanently skip-able warning:
 
 > ### :warning: Warning: :warning:
 >    While some systems allow spaces in filenames,
@@ -325,7 +325,7 @@ encrypted using a basic method and stored with its key.
 > ### Consider using hyphens `-` instead for universal compatibility.
 
         2. For filename elements (e.g. model_name, version_name, etc.), Strip the elements of any forbidden characters (use a class to define letters allowed and loop through the string adding only allowed characters) before adding them to the proposed new filename
-        3. Model types: [(Checkpoint, TextualInversion, Hypernetwork, AestheticGradient, LORA, Controlnet, Poses]
+        3. Model types: [(Checkpoint, TextualInversion, Hyper-network, AestheticGradient, LORA, ControlNet, Poses]
             a. Model type default strategies for base_name:
                 1. checkpoints:
                     ◦ default format: {title}_by_{creator_name}.{model_style}.{base_model}.{version_name}
@@ -335,10 +335,10 @@ encrypted using a basic method and stored with its key.
                         • photo: photo-realistic models
                         • multi: general purpose models. Models not tuned to specific output types, or tuned to multiple types, e.g. SD1.5 base-model
                         • art: Non-photo-realistic artistic styles
-                        • trad: Traditional media styles (e.g., oilpaint, watercolor, sketch)
+                        • trad: Traditional media styles (e.g., oil-paint, watercolor, sketch)
                         • cgi3d: Computer-generated 3D styles (e.g., Pixar, Unreal Engine)
                         • abst: Abstract imagery"line": line-arts (e.g. anime, manga, sketch, charcoal, western traditional animation, comic book, cell-shaded, etc) style art
-                ◦ LoRAs, TI’s, and Hypernetworks
+                ◦ LoRAs, TI’s, and Hyper-networks
                     ▪ Check model tags for keywords indicating the model represents a character, person, or celebrity, etc.
                     ▪ If the model has a tag that matches any of these keywords, the model is a character. Check to see if it represents a real person
                         • check the "resembles_real_person" flag in the API response, if "true" exit the check loop.
@@ -352,7 +352,7 @@ encrypted using a basic method and stored with its key.
                             ◦ give the user the option to change the flag before renaming the model.
                             ◦ If "resembles_real_person" != "false" then real_tag = "true"
                             ▪ Note: Trap the possibility of an empty flag and default to "true"
-                        ◦ LoRAs and Hypernetworks:
+                        ◦ LoRAs and Hyper-networks:
                             ▪ Character:
                                 • {Character_name}_of_{title}_portrayed_by_{actor}_by_<content_>
                         ◦ Textual Inversions:
@@ -361,9 +361,9 @@ encrypted using a basic method and stored with its key.
             - id                    number      The identifier for the model
             - name                  string      The name of the model
             - type                  enum        The model type (Checkpoint,
-                                                TextualInversion, Hypernetwork,
+                                                TextualInversion, Hyper-network,
                                                 AestheticGradient, LORA,
-                                                Controlnet, Poses)
+                                                ControlNet, Poses)
             - nsfw                  boolean     NSFW flag
             - tags                  list        A list of tags associated with
                                                 the model
